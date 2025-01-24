@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Started out with a generic "Hello World" REST API controller,
- * extending this to handle the basic ActivityPub implementation.
+ * Here we handle any JSON/REST requests.
  */
 @RestController
 @RequestMapping( headers = "accept=application/json" )
-public class HomeController {
+public class RestHandler {
 
     @Autowired
     public APProperties apProps;
