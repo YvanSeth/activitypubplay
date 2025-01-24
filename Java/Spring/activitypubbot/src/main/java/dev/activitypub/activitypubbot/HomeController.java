@@ -43,9 +43,9 @@ public class HomeController {
 	 */
 	@GetMapping("/users/springbot")
 	public String actor() {
+		// TODO: this needs some sort of object wrapper or template, and data in database
 		return """
 {
-	// TODO: this needs some sort of object wrapper or template, and data in database
 	"@context": [
 		"https://www.w3.org/ns/activitystreams",
 		"https://w3id.org/security/v1"
