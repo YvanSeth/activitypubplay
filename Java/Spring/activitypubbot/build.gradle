@@ -23,6 +23,7 @@ ext {
 }
 
 dependencies {
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-groovy-templates'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
