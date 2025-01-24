@@ -32,4 +32,16 @@ public class WebHandler {
         System.out.println("WebHandler::root");
         return "index";
     }
+
+    // TODO: presumably there is some way to map things like /<string> to capture string and attempt to resolve template
+    @RequestMapping("/viewbot")
+    public String viewbot() {
+        System.out.println("WebHandler::viewbot");
+        return "viewbot";
+    }
+    @RequestMapping("/makebot")
+    public String makebot() {
+        System.out.println("WebHandler::makebot");
+        return "makebot";
+    }
 }
