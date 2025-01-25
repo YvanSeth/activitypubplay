@@ -2,12 +2,11 @@ package dev.activitypub.activitypubbot;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Object bound to "springbot" prefix in {@link org.springframework.core.env.Environment}.
+ * Using the "springbot" prefix for our configuration values.
  */
 @Configuration
 @ConfigurationProperties(prefix = "springbot")
@@ -23,8 +22,4 @@ public class APProperties {
      */
     @Getter @Setter private String domain; // = "activitypub.bot";
 
-    /*String getScheme() { return this.scheme; }
-    String getDomain() { return this.domain; }
-    void setScheme( String scheme ) { this.scheme = scheme; }
-    void setDomain( String domain ) { this.domain = domain; }*/
 }

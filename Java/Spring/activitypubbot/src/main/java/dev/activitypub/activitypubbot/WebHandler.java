@@ -4,11 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 
 /**
- * Here we handle all non-JSON/REST requests - i.e. the normal "web" view
+ * General web requst implementations
  */
 @Controller
 @Slf4j

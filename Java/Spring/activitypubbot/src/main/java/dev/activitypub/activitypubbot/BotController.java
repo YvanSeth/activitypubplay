@@ -9,6 +9,10 @@ import org.springframework.ui.Model;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This handles requests relating to our bots (users) - so things like
+ * /@username and /users/username.
+ */
 @Controller
 @Slf4j
 public class BotController {

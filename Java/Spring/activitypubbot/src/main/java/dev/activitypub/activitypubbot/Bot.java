@@ -1,17 +1,15 @@
 package dev.activitypub.activitypubbot;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.Instant;
 
 /**
@@ -23,12 +21,6 @@ import java.time.Instant;
 @EntityListeners(AuditingEntityListener.class)
 public class Bot {
 
-    // TODO: probably the wrong way to do this, and it isn't really compatible with 'Entity' anyway
-    //private APProperties props;
-    /*public Bot(APProperties props) {
-        this.props = props;
-    }*/
-    // non-data auto-generated primary key, this should never be exposed
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;

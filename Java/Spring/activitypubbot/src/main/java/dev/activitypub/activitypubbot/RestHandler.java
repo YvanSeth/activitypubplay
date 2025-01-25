@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Here we handle any JSON/REST requests.
+ * Here we handle any JSON/REST requests, which is how ActivityPub instances talk to each other.
  */
 @RestController
 @RequestMapping( headers = "accept=application/json" )
