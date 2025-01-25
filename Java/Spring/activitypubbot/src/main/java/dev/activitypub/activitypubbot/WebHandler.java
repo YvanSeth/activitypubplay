@@ -3,11 +3,15 @@ package dev.activitypub.activitypubbot;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Here we handle all non-JSON/REST requests - i.e. the normal "web" view
  */
 @Controller
+@Slf4j
 public class WebHandler {
     
     @Autowired
@@ -19,12 +23,12 @@ public class WebHandler {
       */	
     @RequestMapping("/@springbot")
     public String atactor() {
-        System.out.println("WebHandler::atactor");
+        log.info("WebHandler::atactor");
         return this.actor();
     }
     @RequestMapping("/users/springbot")
     public String actor() {
-        System.out.println("WebHandler::actor");
+        log.info("WebHandler::actor");
         return "index"; // just flinging out the index page for now
     }
 
@@ -33,19 +37,19 @@ public class WebHandler {
      */
     @RequestMapping("/")
     public String root() {
-        System.out.println("WebHandler::root");
+        log.info("WebHandler::root");
         return "index";
     }
 /*
     // TODO: presumably there is some way to map things like /<string> to capture string and attempt to resolve template
     @RequestMapping("/viewbot")
     public String viewbot() {
-        System.out.println("WebHandler::viewbot");
+        log.info("WebHandler::viewbot");
         return "viewbot";
     }
     @RequestMapping("/makebot")
     public String makebot() {
-        System.out.println("WebHandler::makebot");
+        log.info("WebHandler::makebot");
         return "makebot";
     }
 */

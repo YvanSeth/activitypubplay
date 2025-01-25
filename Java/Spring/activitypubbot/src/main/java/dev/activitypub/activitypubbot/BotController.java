@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class BotController {
 
     @Autowired
@@ -16,7 +18,7 @@ public class BotController {
 
     @GetMapping("/viewbot")
     public String listAll(Model model) {
-        System.out.println("WebHandler::viewbot");
+        log.info("WebHandler::viewbot");
 
         List<Bot> botlist = botRepo.findAll();
         model.addAttribute("bots", botlist);
@@ -26,7 +28,7 @@ public class BotController {
 
     @GetMapping("/makebot")
     public String makebotget(Model model) {
-        System.out.println("WebHandler::makebot");
+        log.info("WebHandler::makebot");
 
         Bot bot = new Bot();
         model.addAttribute("bot", bot);
@@ -36,7 +38,7 @@ public class BotController {
 
     @PostMapping("/makebot")
     public String makebotpost(@ModelAttribute("bot") Bot bot) {
-        System.out.println(bot);
+        //log.info(bot);
 
         botRepo.save(bot);
 
