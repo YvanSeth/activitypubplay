@@ -2,36 +2,29 @@ package dev.activitypub.activitypubbot;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * Object bound to "ap" prefix in {@link org.springframework.core.env.Environment}.
- *
- * @author Yvan Seth
+ * Object bound to "springbot" prefix in {@link org.springframework.core.env.Environment}.
  */
 @Configuration
-@ConfigurationProperties(prefix = "ap")
+@ConfigurationProperties(prefix = "springbot")
 public class APProperties {
 
     /**
-     * Key File Path
+     * Scheme (i.e. https)
      */
-    private String keyFilePath = "keyfile.pem";
+    @Getter @Setter private String scheme; // = "https";
 
     /**
-     * Server domain
+     * Server domain - i.e. https://&lt;domain&gt;/@username
      */
-    private String serverDomain = "activitypub.bot";
+    @Getter @Setter private String domain; // = "activitypub.bot";
 
-    public String getKeyFilePath() {
-        return keyFilePath;
-    }
-    public void setKeyFilePath(String keyFilePath) {
-        this.keyFilePath = keyFilePath;
-    }
-    public String getServerDomain() {
-        return serverDomain;
-    }
-    public void setServerDomain(String serverDomain) {
-        this.serverDomain = serverDomain;
-    }
+    /*String getScheme() { return this.scheme; }
+    String getDomain() { return this.domain; }
+    void setScheme( String scheme ) { this.scheme = scheme; }
+    void setDomain( String domain ) { this.domain = domain; }*/
 }

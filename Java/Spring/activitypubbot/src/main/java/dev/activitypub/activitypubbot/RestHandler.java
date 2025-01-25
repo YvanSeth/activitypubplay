@@ -3,7 +3,6 @@ package dev.activitypub.activitypubbot;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Here we handle any JSON/REST requests.
@@ -11,15 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RestController
 @RequestMapping( headers = "accept=application/json" )
 public class RestHandler {
-
-    @Autowired
-    public APProperties apProps;
-
-	// FIXME: just playing with working out app properties access here
-	@GetMapping("/key")
-	public String key() {
-		return apProps.getKeyFilePath();
-	}
 
 	/**
 	 * Really just an alias to /user/springbot

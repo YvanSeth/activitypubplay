@@ -9,18 +9,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class ActivityPubBotApplication extends SpringBootServletInitializer {
 
     //comment below if deploying outside web container -->
-    @Override
+    /*@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(ActivityPubBotApplication.class);
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(ActivityPubBotApplication.class);

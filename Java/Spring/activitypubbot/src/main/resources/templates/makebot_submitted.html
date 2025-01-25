@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Made Bot</title>
+<style type="text/css">
+    span {
+        display: inline-block;
+        width: 200px;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<div align="center">
+    <h2>Made Bot!</h2>
+    <span>Username:</span><span th:text="${bot.username}"></span><br/>
+    <span>Display Name:</span><span th:text="${bot.name}"></span><br/>
+    <span>Description:</span><span th:text="${bot.summary}"></span><br/>
+    <span>Published:</span><span th:text="${bot.published}"></span><br/>
+    <span>Type:</span><span th:text="${bot.type}"></span><br/>
+</div>
+</body>
+</html>
