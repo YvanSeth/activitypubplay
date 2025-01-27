@@ -25,8 +25,13 @@ public class BotService {
         return repo.save(bot);
     }
 
+    // so far these methods just being calls to repo make me wonder why we need a service in the first place...
     public List<Bot> findAll() {
         return repo.findAll();
+    }
+
+    public Bot getBotByUsername( String username ) {
+        return repo.findByUsername( username );
     }
 
 

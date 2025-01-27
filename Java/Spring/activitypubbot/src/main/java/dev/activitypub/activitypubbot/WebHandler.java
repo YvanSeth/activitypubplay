@@ -2,6 +2,7 @@ package dev.activitypub.activitypubbot;
  
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,13 +20,13 @@ public class WebHandler {
       * handle requests for our "actor" - this presents the web/html view of
       * the bot
       */	
-    @RequestMapping("/@springbot")
-    public String atactor() {
+    @RequestMapping("/@{username}")
+    public String atactor(@PathVariable String username) {
         log.info("WebHandler::atactor");
-        return this.actor();
+        return this.actor( username );
     }
-    @RequestMapping("/users/springbot")
-    public String actor() {
+    @RequestMapping("/users/{username}")
+    public String actor(@PathVariable String username) {
         log.info("WebHandler::actor");
         return "index"; // just flinging out the index page for now
     }

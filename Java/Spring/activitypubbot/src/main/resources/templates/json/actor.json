@@ -1,0 +1,23 @@
+{
+	"@context": [
+		"https://www.w3.org/ns/activitystreams",
+		"https://w3id.org/security/v1"
+	],
+
+	"id": "https://springbot.seth.id.au/users/[(${bot.username})]",
+	"url": "https://springbot.seth.id.au/@[(${bot.username})]",
+	"inbox": "https://springbot.seth.id.au/users/[(${bot.username})]/inbox",
+	"type": "[(${bot.type})]",
+	"preferredUsername": "[(${bot.username})]",
+	"name": "[(${bot.name})]",
+	"manuallyApproveFollowers": false,
+	"indexable": false,
+	"published": "[(${bot.published})]",
+	"summary": "<p>[(${bot.summary})]</p>",
+	"publicKey": {
+		"id": "https://springbot.seth.id.au/users/[(${bot.username})]#main-key",
+		"owner": "https://springbot.seth.id.au/users/[(${bot.username})]",
+		"publicKeyPem": "-----BEGIN PUBLIC KEY-----\\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0A5W6M6b+3meJAU0/Fki\\nkMSrEZ6EEThAv4NmyCeDlRbmFQWbh5rWtb69TxkGkkiSFNM3sgg+RSW44Ehn10mL\\nTptfk6oSWFnFHw9MPxmwlWm1Xw8zmp2OMUlI82w11PECFdITJw/1HW73JSVQYfFq\\nWo9rD6nI9G3LPpAB16015NJ9hyeMvz5RA9p9UE540q0l5iJD/l7bxCjHglOQInQX\\neCiR2ErzQSVq3AMhBehoP7HuhKjs8swi8dOgjO3sawqxUyv2+lkesFD2rvxCcXRO\\nBkg/Y7nmJSEcqtcmKYQdObPCIt/wCZNAihJz7dwnGKLE2+JJqPZMer9fAj077OkQ\\neQIDAQAB\\n-----END PUBLIC KEY-----"
+	}
+}
+

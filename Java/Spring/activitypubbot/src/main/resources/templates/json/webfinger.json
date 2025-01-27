@@ -1,0 +1,12 @@
+{
+	"subject": "acct:[(${bot.username})]@springbot.seth.id.au",
+
+	"links": [
+		{
+			"rel": "self",
+			"type": "application/activity+json",
+			"href": "https://springbot.seth.id.au/users/[(${bot.username})]"
+		}
+	]
+}
+

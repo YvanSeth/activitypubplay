@@ -20,12 +20,8 @@ public class BotController {
     @Autowired
     private BotRepo botRepo;
 
-    private BotService botService;
-
     @Autowired
-    public BotController(BotService botService) {
-        this.botService = botService;
-    }
+    private BotService botService;
 
     @GetMapping("/viewbot")
     public String listAll(Model model) {
