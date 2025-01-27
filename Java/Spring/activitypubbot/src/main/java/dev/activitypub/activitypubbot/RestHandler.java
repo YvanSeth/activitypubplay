@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -22,55 +23,45 @@ public class RestHandler {
     @Autowired
     private BotService botServ;
 
-    @Autowired
-    @Qualifier("messageTemplateEngine")
-    protected SpringTemplateEngine jsonTemplater;
-
 	/**
 	 * Really just an alias to /user/<username>
 	 */
-	@RequestMapping(value = "/@{username}", produces = "application/activity+json") // content type based on Masto request
-	public String atactor(@PathVariable String username) {
+	@GetMapping(value = "/@{username}", produces = "application/activity+json") // content type based on Masto request
+	public ResponseEntity<String> atactor(@PathVariable String username) {
 		return this.actor( username );
 	}
 
 	/**
 	 * Access the bot/user
 	 */
-	@RequestMapping(value = "/users/{username}", produces = "application/activity+json") // content type based on Masto request
-	public String actor(@PathVariable String username) {
+	@GetMapping(value = "/users/{username}", produces = "application/activity+json") // content type based on Masto request
+	public ResponseEntity<String> actor(@PathVariable String username) {
 
         Bot bot = botServ.getBotByUsername( username );
         if( bot == null ) {
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "These are not the droids you are looking for" );
+            return new ResponseEntity<>("These are not the droids you are looking for.", HttpStatus.NOT_FOUND);
         }
-		// TODO: kludgetown... we should generate JSON programmatically rather than templates
-        final Context ctx = new Context();
-        ctx.setVariable("bot", bot);
-        final String json = jsonTemplater.process("json/actor", ctx);
-        return json;
+        return ResponseEntity.ok(bot.toString());
 	}
 
 	/**
 	 * Webfinger the user...
 	 */
 	@GetMapping(value = "/.well-known/webfinger", produces = "application/jrd+json") // content type based on Masto request
-	public String webfinger(@RequestParam("resource") String resource) {
+	public ResponseEntity<String> webfinger(@RequestParam("resource") String resource) {
 
         // resource should be of the form: acct:<username>@<domain> 
         // so this should be robustly checked, but for now just yoink out the username
-        String username = resource.substring(resource.indexOf(":") + 1, resource.indexOf("@"));
-        if ( username == null) {
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Malformed" );
+        int colonPos = resource.indexOf(":");
+        int atPos = resource.indexOf("@");
+        if ( colonPos < 0 || atPos < 0 || atPos < colonPos ) {
+            return new ResponseEntity<>("Incorrect query format",HttpStatus.BAD_REQUEST);
         }
+        String username = resource.substring(colonPos + 1, atPos);
         Bot bot = botServ.getBotByUsername( username );
         if( bot == null ) {
-            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "These are not the droids you are looking for" );
+            return new ResponseEntity<>("These are not the droids you are looking for.", HttpStatus.NOT_FOUND);
         }
-		// TODO: kludgetown... we should generate JSON programmatically rather than templates
-        final Context ctx = new Context();
-        ctx.setVariable("bot", bot);
-        final String json = jsonTemplater.process("json/webfinger", ctx);
-        return json;
+        return ResponseEntity.ok(bot.toString());
     }
 }
