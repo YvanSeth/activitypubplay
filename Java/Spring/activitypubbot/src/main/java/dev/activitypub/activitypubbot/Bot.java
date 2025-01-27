@@ -58,7 +58,6 @@ public class Bot {
     @Column(nullable=true,unique=false)
     @Getter @Setter private String summary; // "<p>A bot written using Java/Spring</p>",
 
-
     ///////////////////////////////////////////////////////////////////////////
     // The following values will be auto-generated on bot-creation
 
@@ -81,26 +80,8 @@ public class Bot {
     @Column(nullable=false,unique=false)
     @Getter private static final boolean indexable = false;
 
-    // TODO: should this class have the functions for generating derived values based on config vals? How does it get the config...
-    
-    /* these are all just derived from (preferred)Username - the scheme and domain-name should come from config
-    private String id; // "https://springbot.seth.id.au/users/springbot",
-    private String url; // "https://springbot.seth.id.au/@springbot",
-    private String inbox; // "https://springbot.seth.id.au/users/springbot/inbox",
-    private String publicKeyId; // "https://springbot.seth.id.au/users/springbot#main-key",
-    */
-    public String getId() {
-        // TODO: is there some sort of 'uribuilder' - probably need our own, lots of uris to build
-		//return props.getScheme() + "://" + props.getDomain() + "/users/" + this.getUsername();
-		return this.getUsername();
-    }
-
-    /* this is just a copy of "id"
-    private String publicKeyOwner; // "https://springap.seth.id.au/users/springbot",
-    */
-
     @Override
     public String toString() {
-        return "Bot: " + username;
+        return "Bot: " + this.username;
     }
 }

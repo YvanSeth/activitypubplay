@@ -21,5 +21,4 @@ public class APProperties {
      * Server domain - i.e. https://&lt;domain&gt;/@username
      */
     @Getter @Setter private String domain; // = "activitypub.bot";
-
 }

@@ -20,11 +20,18 @@ public class BotController {
     @Autowired
     private BotRepo botRepo;
 
+    private BotService botService;
+
+    @Autowired
+    public BotController(BotService botService) {
+        this.botService = botService;
+    }
+
     @GetMapping("/viewbot")
     public String listAll(Model model) {
         log.info("WebHandler::viewbot");
 
-        List<Bot> botlist = botRepo.findAll();
+        List<Bot> botlist = botService.findAll();
         model.addAttribute("bots", botlist);
 
         return "viewbot";
