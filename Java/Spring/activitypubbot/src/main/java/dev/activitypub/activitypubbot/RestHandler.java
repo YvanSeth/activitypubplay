@@ -17,7 +17,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
  * Here we handle any JSON/REST requests, which is how ActivityPub instances talk to each other.
  */
 @RestController
-@RequestMapping( headers = "accept=application/json" )
 public class RestHandler {
 
     @Autowired
@@ -32,7 +31,7 @@ public class RestHandler {
 	}
 
 	/**
-	 * Access the bot/user
+	 * Get the bot/user 'actor' data response
 	 */
 	@GetMapping(value = "/users/{username}", produces = "application/activity+json") // content type based on Masto request
 	public ResponseEntity<String> actor(@PathVariable String username) {

@@ -31,7 +31,7 @@ public class BotService {
     }
 
     public Bot getBotByUsername( String username ) {
-        return repo.findByUsername( username );
+        return repo.findByUsername( username ).get();
     }
 
 
@@ -65,6 +65,10 @@ public class BotService {
      */
     public String getOutbox(Bot bot) {
         return getUsersURI() + bot.getUsername() + "/outbox";
+    }
+
+    public Bot save(Bot bot) {
+        return repo.save(bot);
     }
 }
 

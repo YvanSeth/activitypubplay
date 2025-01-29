@@ -18,16 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 public class BotController {
 
     @Autowired
-    private BotRepo botRepo;
-
-    @Autowired
-    private BotService botService;
+    private BotService botServ;
 
     @GetMapping("/viewbot")
     public String listAll(Model model) {
         log.info("WebHandler::viewbot");
 
-        List<Bot> botlist = botService.findAll();
+        List<Bot> botlist = botServ.findAll();
         model.addAttribute("bots", botlist);
 
         return "viewbot";
@@ -47,7 +44,7 @@ public class BotController {
     public String makebotpost(@ModelAttribute("bot") Bot bot) {
         //log.info(bot);
 
-        botRepo.save(bot);
+        botServ.save(bot);
 
         return "makebot_submitted";
     }

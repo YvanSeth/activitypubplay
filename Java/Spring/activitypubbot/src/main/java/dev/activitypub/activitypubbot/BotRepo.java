@@ -1,10 +1,20 @@
 package dev.activitypub.activitypubbot;
  
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+import java.util.List;
 
 /**
- * Database shenanigans...
+ * Interface for a Bot respository.
+ *
+ * Working to the @Repository documentation and some other examples
+ * for this, a pattern noted to be "close to the DAO pattern". But I
+ * am not yet clear on the need/justification for this approach.
  */
-public interface BotRepo extends JpaRepository<Bot, Long> {
-    Bot findByUsername(String username);
+public interface BotRepo {
+
+    Bot save(Bot bot);
+
+    Optional<Bot> findByUsername(String username);
+
+    List<Bot> findAll();
 }
