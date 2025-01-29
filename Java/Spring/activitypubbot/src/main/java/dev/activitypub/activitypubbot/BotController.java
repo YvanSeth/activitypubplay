@@ -41,11 +41,9 @@ public class BotController {
     }
 
     @PostMapping("/makebot")
-    public String makebotpost(@ModelAttribute("bot") Bot bot) {
-        //log.info(bot);
-
-        botServ.save(bot);
-
+    public String makebotpost(Bot bot, Model model) {
+        bot = botServ.save(bot);
+        model.addAttribute("bot", bot);
         return "makebot_submitted";
     }
 }

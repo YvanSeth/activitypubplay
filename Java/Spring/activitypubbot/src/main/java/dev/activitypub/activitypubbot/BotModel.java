@@ -92,7 +92,7 @@ public class BotModel {
     }
 
     Bot asBot() {
-        return new Bot( username, name, summary, type, manuallyApproveFollowers, indexable, publicKeyPem );
+        return new Bot( username, name, summary, published, publicKeyPem, type, manuallyApproveFollowers, indexable );
     }
 
     @Override

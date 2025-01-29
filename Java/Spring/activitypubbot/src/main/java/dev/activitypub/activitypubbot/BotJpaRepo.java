@@ -24,8 +24,7 @@ public class BotJpaRepo implements BotRepo {
         BotModel botModel = BotModel.from(bot);
         BotModel saved = botJdbcRepo.save(botModel);
         return saved.asBot();
-        // this pattern comes from the 'ensembler' MemberRepositoryJdbcAdapter impl
-        // TODO: in our case I'm not sure we need to be returning a Bot, could be void?
+        // returning the bot here means that automated fields like creation dates are bubbled up
     }
 
     public Optional<Bot> findByUsername(String username) {

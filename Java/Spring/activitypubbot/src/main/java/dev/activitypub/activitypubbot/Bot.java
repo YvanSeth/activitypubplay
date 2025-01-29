@@ -41,14 +41,15 @@ public class Bot {
 
     Bot() {
     }
-    Bot( String username, String name, String summary, String type, boolean manuallyApproveFollowers, boolean indexable, String pubicKeyPem ) {
+    Bot( String username, String name, String summary, Instant published, String publicKeyPem, String type, boolean manuallyApproveFollowers, boolean indexable ) {
         this.username = username;
         this.name = name;
         this.summary = summary;
+        this.published = published;
+        this.publicKeyPem = publicKeyPem;
         this.type = type;
         this.manuallyApproveFollowers = manuallyApproveFollowers;
         this.indexable = indexable;
-        this.publicKeyPem = publicKeyPem;
     }
 }
 
