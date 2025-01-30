@@ -31,7 +31,7 @@ public class BotService {
     }
 
     public Bot getBotByUsername( String username ) {
-        return repo.findByUsername( username ).get();
+        return repo.findByUsername( username ).orElseThrow(() -> new BotNotFoundByUsernameException(username));
     }
 
 
