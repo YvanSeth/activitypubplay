@@ -12,12 +12,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import java.security.PublicKey;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Our core Bot (aka user) data as stored persistently in the database.
+ * Our core Bot (aka user, or 'actor') data as stored persistently in the database.
  * This is all the key non-derived data as required by the ActivityPub
- * specification. NOTE: This is not a comprehensive implementation!
+ * specification. NOTE: This is not a comprehensive AP 'actor' implementation!
  */
+@Slf4j
 @Entity
 @Table(name = "bot")
 @EntityListeners(AuditingEntityListener.class)
@@ -68,8 +74,8 @@ public class BotModel {
 
     // TODO how and where do we generate this beastie?!?!
     @Column(nullable=true,unique=false) // FIXME: this isn't true, just easy for now
-    @Getter private String publicKeyPem; // "-----BEGIN PUBLIC KEY-----\\nMI [...] AB\\n-----END PUBLIC KEY-----"
-    
+    @Getter private KeyPair keyPair; 
+
     @Column(nullable=false,unique=false)
     @Getter private String type;
 
@@ -87,12 +93,24 @@ public class BotModel {
         bm.type = bot.getType();
         bm.manuallyApproveFollowers = bot.isManuallyApproveFollowers();
         bm.indexable = bot.isIndexable();
-        bm.publicKeyPem = bot.getPublicKeyPem();
+        bm.keyPair = bot.getKeyPair();
+        if ( bm.keyPair == null ) {
+            // if a bot is created without a KeyPair is must be a new bot and needs a KeyPair
+            // not confident this is the best place or way to do this, but "works for now"
+            try {
+                KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+                generator.initialize(2048); // TODO: make this configurable?
+                bm.keyPair = generator.generateKeyPair();
+            } catch (NoSuchAlgorithmException e) {
+                // TODO: this should be pretty fatal to functionality really
+                log.error("BotModel::from: NoSuchAlgorithm when creating: " + bot);
+            }
+        }
         return bm;
     }
 
     Bot asBot() {
-        return new Bot( username, name, summary, published, publicKeyPem, type, manuallyApproveFollowers, indexable );
+        return new Bot( username, name, summary, published, keyPair, type, manuallyApproveFollowers, indexable );
     }
 
     @Override
