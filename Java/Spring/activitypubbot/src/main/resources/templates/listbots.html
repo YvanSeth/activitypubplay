@@ -17,9 +17,13 @@
     <ul th:if="${bots.empty}">
         <li>No Bots!</li>
     </ul>
-    <ul th:each="bot : ${bots}">
-        <li>Bot: <a th:href="@{/viewbot/} + ${bot.username}"><span th:text="${bot.username}">Bot</span></a></li>
-    </ul>
+    <th:block th:each="bot : ${bots}">
+        <span>Bot:</span>
+        <span><a th:href="@{/viewbot/} + ${bot.username}">[[${bot.username}]]</a></span>
+        <br>
+    </th:block>
+    <br>
+    <a href="/">HOME</a>
 </div>
 </body>
 </html>

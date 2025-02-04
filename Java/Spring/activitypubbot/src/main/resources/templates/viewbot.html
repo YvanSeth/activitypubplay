@@ -8,6 +8,7 @@
         display: inline-block;
         width: 200px;
         text-align: left;
+        margin-bottom: 0.5em;
     }
 </style>
 </head>
@@ -15,10 +16,14 @@
 <div align="center">
     <h2>Bot:</h2>
     <span>Username:</span><span th:text="${bot.username}"></span><br/>
+    <span>Id:</span><span th:text="'@' + ${bot.username} + '@springbot.seth.id.au'"></span><br/>
     <span>Display Name:</span><span th:text="${bot.name}"></span><br/>
     <span>Description:</span><span th:text="${bot.summary}"></span><br/>
     <span>Published:</span><span th:text="${bot.published}"></span><br/>
     <span>Type:</span><span th:text="${bot.type}"></span><br/>
+    <br>
+    <a href="/">HOME</a> |
+    <a href="/viewbot">Bot List</a>
 </div>
 </body>
 </html>
