@@ -12,7 +12,7 @@ welcome! (I'm using GitHub as I also need to get myself proficient with
 git!)
 
 Yvan Seth <codinggit@seth.id.au>
-<Yvan.Seth.id.au>
+[Yvan.Seth.id.au](https://yvan.seth.id.au)
 
 ## Java / Spring Boot
 
