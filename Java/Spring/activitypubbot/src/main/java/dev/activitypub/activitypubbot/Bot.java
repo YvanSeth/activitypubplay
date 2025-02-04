@@ -11,11 +11,13 @@ import org.bouncycastle.openssl.PEMWriter;
 import org.bouncycastle.util.io.pem.PemObject;
 import java.io.StringWriter;
 import java.io.IOException;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize; 
 
 /**
  * POJO for our Bot...
  */
 @Data
+@JsonSerialize(using = BotAPActorJsonSerializer.class)
 public class Bot {
 
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
