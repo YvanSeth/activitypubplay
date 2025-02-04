@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>List Bot</title>
-    .main {
-        text-align: center;
-    }
-</style>
+    <meta charset="ISO-8859-1">
+    <title>Bot List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+    </style>
 </head>
 <body>
-<div class="main">
-    <h2>Pick-a-Bot!</h2>
-    <th:block th:if="${bots.empty}">
-        <h3>No Bots!</h3>
-    </th:block>
-    <th:block th:each="bot : ${bots}">
-        <a th:href="@{/viewbot/} + ${bot.username}">[[${@botService.getHandle(bot)}]]</a><br>
-    </th:block>
-    <br>
-    <br>
-    <a href="/">HOME</a>
+<div class="container-fluid">
+    <h1>Spring Bot</h1>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="/">HOME</a><br>
+            <a href="/viewbot">Bot List</a><br>
+            <a href="/makebot">New Bot</a>
+        </div>
+        <div class="col-sm-8">
+
+            <h2>Pick-a-Bot!</h2>
+            <th:block th:if="${bots.empty}">
+                <h3>No Bots!</h3>
+            </th:block>
+            <th:block th:each="bot : ${bots}">
+                <a th:href="@{/viewbot/} + ${bot.username}">[[${@botService.getHandle(bot)}]]</a><br>
+            </th:block>
+
+        </div>
+        <div class="col-sm-2"></div>
+    </div> 
 </div>
 </body>
 </html>

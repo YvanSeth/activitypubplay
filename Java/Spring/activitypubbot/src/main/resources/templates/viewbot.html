@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>View Bot</title>
-<style type="text/css">
-    .main {
-        text-align: center;
-    }
-    span {
-        display: inline-block;
-        width: 40em;
-        text-align: left;
-        margin-bottom: 0.5em;
-    }
-    span.left {
-        text-align: right;
-        margin-right: 1em;
-    }
-</style>
+    <meta charset="ISO-8859-1">
+    <title>View Bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        .value {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<div class="main">
-    <h2>Bot:</h2>
-    <span class="left">Username:</span><span th:text="${bot.username}"></span><br/>
-    <span class="left">Id:</span><span th:text="${@botService.getHandle(bot)}"></span><br/>
-    <span class="left">Display Name:</span><span th:text="${bot.name}"></span><br/>
-    <span class="left">Description:</span><span th:text="${bot.summary}"></span><br/>
-    <span class="left">Published:</span><span th:text="${bot.published}"></span><br/>
-    <span class="left">Type:</span><span th:text="${bot.type}"></span><br/>
-    <span class="left">Public Key:</span><span></span>
-    <pre th:text="${bot.getPublicKeyPEMString()}"></pre>
-    <br>
-    <br>
-    <a href="/">HOME</a> |
-    <a href="/viewbot">Bot List</a>
+<div class="container-fluid">
+    <h1>Spring Bot</h1>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="/">HOME</a><br>
+            <a href="/viewbot">Bot List</a><br>
+            <a href="/makebot">New Bot</a>
+        </div>
+        <div class="col-sm-8">
+
+            <h2>View Bot</h2>
+            Username: <span class="value" th:text="${bot.username}"></span><br>
+            Id: <span class="value" th:text="${@botService.getHandle(bot)}"></span><br>
+            Display Name: <span class="value" th:text="${bot.name}"></span><br>
+            Description: <span class="value" th:text="${bot.summary}"></span><br>
+            Published: <span class="value" th:text="${bot.published}"></span><br>
+            Type: <span class="value" th:text="${bot.type}"></span><br>
+            Public Key:<br>
+            <pre th:text="${bot.getPublicKeyPEMString()}"></pre>
+
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
 </div>
 </body>
 </html>
