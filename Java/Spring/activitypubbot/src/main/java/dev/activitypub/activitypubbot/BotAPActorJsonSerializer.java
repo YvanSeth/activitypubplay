@@ -56,6 +56,8 @@ public class BotAPActorJsonSerializer extends StdSerializer<Bot> {
         jgen.writeStringField("type", bot.getType());
         jgen.writeStringField("summary", bot.getSummary());
 
+        jgen.writeStringField("published", bot.getPublished().toString());
+
         jgen.writeBooleanField("manuallyApproveFollowers", bot.isManuallyApproveFollowers());
         jgen.writeBooleanField("indexable", bot.isIndexable());
 
