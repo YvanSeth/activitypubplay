@@ -1,15 +1,18 @@
 # activitypubplay
-Yvan's basic ActivityPub implementations in various languages. The project is
-to build an implementation that provides the ability to do nothing more than
-create "bots" and post messages as those bots.  I've made sarts in Go and PHP
-which I'll push into here in time, but this repo was created with a Java
-implementation as the first project.
 
-I claim to be no expert in any programming language, these are not intended to
-be definitive expert quality coding examples. They are in fact a learning
-experience for myself and feedback is thus very welcome!
+Yvan's basic ActivityPub implementations in (eventually) various languages. The
+simple project spec is to build an implementation that provides the ability to
+to create "bot" accounts that can be followed and post messages, receiving
+replies as perhaps a stretch-goal.
+
+I make no claims to be an expert in any programming language used here, these
+are not intended to be definitive expert quality coding examples. They are in
+fact primarily a learning experience for myself and feedback is thus very
+welcome! (I'm using GitHub as I also need to get myself proficient with
+git!)
 
 Yvan Seth <codinggit@seth.id.au>
+<Yvan.Seth.id.au>
 
 ## Java / Spring Boot
 
@@ -17,21 +20,22 @@ Yvan Seth <codinggit@seth.id.au>
 
 An implementation using the
 [Spring Boot](https://docs.spring.io/spring-boot/index.html "Spring Boot")
-framework trying to refresh and educate myself in some styles of MVC
-and DAO pattern type web application implementations as well as remember
-Java itself! A language I have only used very lightly in the last
-20 years, though I learnt it and even taught using it back in Uni.
-(A very long time ago...)
+framework trying to refresh and educate myself in some styles of MVC and DAO
+pattern type web application implementations as well as remember Java itself! A
+language I have only used very lightly in the last 20 years, though I learnt it
+and even taught using it back in Uni. (A very long time ago...)
 
 ## Go
 
-Actually the first implementation I started but not got too far yet, hopefully
-to upload in time. Not got as far as picking a web framework for this.
+I was originally going to write AP bot code in Go, but then I got distracted
+by:
 
 ## PHP / Laravel
 
-My second implementation but also not got too far with it yet, going with
-Laravel as it was specified in a job role I was applying for but that blanked
-out so I moved on with the Java one as higher priority.
+I made a start on the Laravel framework, but then I got distracted by Java /
+Spring Boot!
 
+I hope to return to one of the above once I'm happy enough with the base level
+Java implementation... or maybe I'll get distracted by a whole other option.
+(Rust is seeming interesting actually.)
 
