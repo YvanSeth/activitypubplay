@@ -65,14 +65,17 @@ public class RestHandler {
             //return new ResponseEntity<>("These are not the droids you are looking for.", HttpStatus.NOT_FOUND);
         }
 
-        // TODO: So here's a whole other way of generating custom JSON as compared to the BotAPActorJSONSerializer approach
+        // TODO: So here's a whole other way of generating custom JSON as
+        // compared to the BotAPActorJSONSerializer approach, should perhaps
+        // settle on one style of doing it (if we're going to do it either way
+        // in the end.)
         Map<String, Object> response = Map.of(
-                "subject", bot.getUsername() + "@springbot.seth.id.au",
+                "subject", botServ.getWebfingerSubject( bot ),
                 "links", List.of(
                     Map.of(
                         "rel", "self",
                         "type", "application/activity+json",
-                        "href", "https://springbot.seth.id.au/users/" + bot.getUsername()
+                        "href", botServ.getId( bot )
                         )
                     )
                 );

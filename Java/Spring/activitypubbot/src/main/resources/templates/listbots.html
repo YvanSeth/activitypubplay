@@ -3,25 +3,21 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>List Bot</title>
-<style type="text/css">
-    span {
-        display: inline-block;
-        width: 200px;
-        text-align: left;
+    .main {
+        text-align: center;
     }
 </style>
 </head>
 <body>
-<div align="center">
+<div class="main">
     <h2>Pick-a-Bot!</h2>
-    <ul th:if="${bots.empty}">
-        <li>No Bots!</li>
-    </ul>
-    <th:block th:each="bot : ${bots}">
-        <span>Bot:</span>
-        <span><a th:href="@{/viewbot/} + ${bot.username}">[[${bot.username}]]</a></span>
-        <br>
+    <th:block th:if="${bots.empty}">
+        <h3>No Bots!</h3>
     </th:block>
+    <th:block th:each="bot : ${bots}">
+        <a th:href="@{/viewbot/} + ${bot.username}">[[${@botService.getHandle(bot)}]]</a><br>
+    </th:block>
+    <br>
     <br>
     <a href="/">HOME</a>
 </div>

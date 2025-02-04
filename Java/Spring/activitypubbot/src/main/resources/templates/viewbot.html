@@ -4,24 +4,33 @@
 <meta charset="ISO-8859-1">
 <title>View Bot</title>
 <style type="text/css">
+    .main {
+        text-align: center;
+    }
     span {
         display: inline-block;
-        width: 200px;
+        width: 40em;
         text-align: left;
         margin-bottom: 0.5em;
+    }
+    span.left {
+        text-align: right;
+        margin-right: 1em;
     }
 </style>
 </head>
 <body>
-<div align="center">
+<div class="main">
     <h2>Bot:</h2>
-    <span>Username:</span><span th:text="${bot.username}"></span><br/>
-    <span>Id:</span><span th:text="'@' + ${bot.username} + '@springbot.seth.id.au'"></span><br/>
-    <span>Display Name:</span><span th:text="${bot.name}"></span><br/>
-    <span>Description:</span><span th:text="${bot.summary}"></span><br/>
-    <span>Published:</span><span th:text="${bot.published}"></span><br/>
-    <span>Type:</span><span th:text="${bot.type}"></span><br/>
-    <span>Public Key:</span><pre th:text="${bot.getPublicKeyPEMString()}"></pre><br/>
+    <span class="left">Username:</span><span th:text="${bot.username}"></span><br/>
+    <span class="left">Id:</span><span th:text="${@botService.getHandle(bot)}"></span><br/>
+    <span class="left">Display Name:</span><span th:text="${bot.name}"></span><br/>
+    <span class="left">Description:</span><span th:text="${bot.summary}"></span><br/>
+    <span class="left">Published:</span><span th:text="${bot.published}"></span><br/>
+    <span class="left">Type:</span><span th:text="${bot.type}"></span><br/>
+    <span class="left">Public Key:</span><span></span>
+    <pre th:text="${bot.getPublicKeyPEMString()}"></pre>
+    <br>
     <br>
     <a href="/">HOME</a> |
     <a href="/viewbot">Bot List</a>
