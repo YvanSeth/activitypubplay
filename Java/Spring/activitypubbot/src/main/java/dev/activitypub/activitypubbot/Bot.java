@@ -43,7 +43,7 @@ public class Bot {
      * ActivityPub key JSON.
      * "-----BEGIN PUBLIC KEY-----\\nMI [...] AB\\n-----END PUBLIC KEY-----"
      */
-    String getPublicKeyPEMString() {
+    public String getPublicKeyPEMString() {
         // Note: for performance it could be worth storing this in the db, or caching it in some way
         PublicKey pk = keyPair.getPublic();
         StringWriter w = new StringWriter();

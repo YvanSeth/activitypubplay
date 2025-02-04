@@ -21,6 +21,7 @@
     <span>Description:</span><span th:text="${bot.summary}"></span><br/>
     <span>Published:</span><span th:text="${bot.published}"></span><br/>
     <span>Type:</span><span th:text="${bot.type}"></span><br/>
+    <span>Public Key:</span><pre th:text="${bot.getPublicKeyPEMString()}"></pre><br/>
     <br>
     <a href="/">HOME</a> |
     <a href="/viewbot">Bot List</a>
