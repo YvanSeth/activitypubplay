@@ -18,6 +18,15 @@
         .value {
             font-weight: bold;
         }
+        #posts {
+            border-right: solid 1px;
+        }
+        #followers {
+            border-left: solid 1px;
+        }
+        #posttext {
+            height: 5em;
+        }
     </style>
 </head>
 <body>
@@ -42,6 +51,29 @@
             Public Key:<br>
             <pre th:text="${bot.getPublicKeyPEMString()}"></pre>
 
+            <div class="container-fluid">
+                <div class="row h">
+                    <div id="posts" class="col-sm-4">
+                        <h3>New Post</h3>
+                        <form class="g-3" method="post">
+                            <div class="mb-3">
+                                <textarea class="form-control" id="posttext" name="posttext" placeholder="Post as this bot..." th:value="${posttext}"></textarea>
+                            </div>
+                            <div class="mb-3 text-right">
+                                <button type="submit" class="btn btn-primary">Post!</button>    
+                            </div>
+                        </form>
+
+                        <h3>Past Posts</h3>
+                    </div>
+                    <div id="replies" class="col-sm-4">
+                        <h3>Replies</h3>
+                    </div>
+                    <div id="followers" class="col-sm-4">
+                        <h3>Followers</h3>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-sm-2"></div>
     </div>

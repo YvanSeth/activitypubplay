@@ -72,4 +72,13 @@ public class BotController {
         model.addAttribute("bot", bot);
         return "makebot_submitted";
     }
+
+    @PostMapping("/viewbot/{username}")
+    public String viewbotpost(String posttext, @PathVariable String username, Model model) {
+        log.info("BotController::postpost: " + username + ", content: " + posttext);
+
+        Bot bot = botServ.getBotByUsername(username);
+        model.addAttribute("bot", bot);
+        return "viewbot";
+    }
 }
