@@ -1,24 +1,19 @@
 package dev.activitypub.activitypubbot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  * Here we handle any JSON/REST requests, which is how ActivityPub instances talk to each other.
@@ -43,10 +38,9 @@ public class RestHandler {
 	 */
 	@GetMapping(value = "/users/{username}", produces = "application/activity+json") // content type based on Masto request
 	public Bot actor(@PathVariable String username) {
-
         Bot bot = botServ.getBotByUsername( username );
         if( bot == null ) {
-            //return new ResponseEntity<>("These are not the droids you are looking for.", HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "These are not the droids you are looking for.");
         }
         return bot;
 	}
@@ -62,12 +56,12 @@ public class RestHandler {
         int colonPos = resource.indexOf(":");
         int atPos = resource.indexOf("@");
         if ( colonPos < 0 || atPos < 0 || atPos < colonPos ) {
-            //return new ResponseEntity<>("Incorrect query format",HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect query format.");
         }
         String username = resource.substring(colonPos + 1, atPos);
         Bot bot = botServ.getBotByUsername( username );
         if( bot == null ) {
-            //return new ResponseEntity<>("These are not the droids you are looking for.", HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "These are not the droids you are looking for.");
         }
 
         // TODO: So here's a whole other way of generating custom JSON as
@@ -90,14 +84,29 @@ public class RestHandler {
 
 
 	/**
-	 * 
+	 * Here we handle JSON POST requests to a bot's inbox URL, this could be
+     * any one of a variety of different ActivityPub "actions" as per:
+     *  https://w3c.github.io/activitypub/#server-to-server-interactions
+     * which also documents content types.
 	 */
-	@PostMapping(value = "/users/{username}/inbox", produces = "application/activity+json") // content type based on Masto request
+	@PostMapping(
+        value = "/users/{username}/inbox",
+        consumes = { // possible values of the POST "Content-Type" header, as per spec
+                "application/ld+json; profile=\"https://www.w3.org/ns/activitystreams\"",
+                "application/activity+json"
+            },
+        produces = { // possible values of the POST "Accept" header? 
+                "application/activity+json",
+                "application/ld+json;", // Mastodon seems to require the semi-colon but with any old garbage after it, spring-boot seems to ignore the semi-colon anyway
+                "application/json" // not as per spec, but Mastodon accepts this
+            }
+        )
+                                
 	public String inboxpost(@PathVariable String username, @RequestBody Map<String, Object> postdata) {
         log.info("RestHandler::inboxpost: " + username + " map: " + postdata.toString());
         Bot bot = botServ.getBotByUsername( username );
         if( bot == null ) {
-            //return new ResponseEntity<>("These are not the droids you are looking for.", HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "These are not the droids you are looking for.");
         }
         if( !postdata.containsKey("type") ) {
             // no request type, so we think we've been sent junk
@@ -128,5 +137,4 @@ public class RestHandler {
                 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Unknown 'type': " + postdata.get("type") );
         }
 	}
-
 }
