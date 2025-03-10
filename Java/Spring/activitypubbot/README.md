@@ -1,10 +1,10 @@
-# Java / Sprin Boot ActivityPub Bot 
+# Java / Spring Boot ActivityPub Bot 
 
 The status of this code is that it implements a basic service where via a web
 UI you can create "bot" profiles which other ActivityPub instances can
 successfully look up.
 
-The next step would be to implment follows. Followed by posts. So then you'd
+The next step would be to implement follows. Followed by posts. So then you'd
 have a bot that people can follow and it can post things that those people then
 see.
 
